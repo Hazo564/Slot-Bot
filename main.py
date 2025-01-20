@@ -13,9 +13,12 @@ bot.remove_command("help")
 async def on_ready():
     print(f"{bot.user.name} is Ready")
     await expire()
-                            
-with open("config.json", "r") as file:
-        hmm = json.load(file)
+hmm = {
+    "staffrole": 1323347787856740422,
+    "premiumeroleid": 1305325148831744020,
+    "guildid": 1289633935579680883,
+    "categoryid": 1312383661961904149,
+}
 
 rid = hmm["premiumeroleid"]
 cid = hmm["categoryid"]
@@ -44,15 +47,15 @@ async def expire():
             print(nt >= finalse)
 
             if nt >= finalse:
-                
+
                 with open("data.json", "w") as file:
                     json.dump(data, file, indent=4)
-                
+
                 channel = bot.get_channel(item["channelid"])
                 guild = bot.get_guild(int(hmm["guildid"]))
                 member = guild.get_member(item["userid"])
 
-                
+
 
                 if member and channel:
                     print(member.id)
@@ -92,7 +95,7 @@ async def on_message(message):
                 data.append(dataz)
                 with open("pingcount.json", "w") as file:
                     json.dump(data, file, indent=4)
-                    await message.channel.send("1/2")
+                    await message.channel.send("1/3")
                     return
             for c in data:
                 print(c)
@@ -108,14 +111,14 @@ async def on_message(message):
                     cx = datetime.datetime.now()
                     print(cx.timestamp())
                     nowtime = cx.strftime("%Y%m%d")
-                    
+
 
                     if slot == nowtime:
                         xxx = c["count"]
-                        if c["count"] >= 3:
+                        if c["count"] >= 4:
                             channel = bot.get_channel(c["channelid"])
                             await channel.set_permissions(message.author, send_messages=False)
-                            await message.channel.send("3/2 Slot Revoked <@&your staff role id>\n**Reason:** 3 here ping")
+                            await message.channel.send("4/3 Slot Revoked <@&your staff role id>\n**Reason:** 4 here ping")
                             return
                         c["count"] = c["count"] + 1
                         await message.channel.send(f"{xxx}/{xxx}")
@@ -137,20 +140,20 @@ async def on_message(message):
                 data.append(datazx)
                 with open("pingcount.json", "w") as file:
                     json.dump(data, file, indent=4)
-                    await message.channel.send("1/2")
-
-            
+                    await message.channel.send("1/3")
 
 
 
-   
+
+
+
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(description="**,create** - Use To Create Slot\n**,add** - Use To Add User In Slot\n**,remove** - Use To Remove User In SLot\n**,renew** - Use To Renew Slot",color=0xFFFF00)
     embed.set_thumbnail(url=ctx.guild.icon)
     embed.set_author(name="Slot Bot Help Menu")
     await ctx.send(embed=embed,delete_after=30)
- 
+
 @bot.command()
 @commands.has_role(int(staff))
 async def add(ctx,member: discord.Member=None, channel: discord.TextChannel = None):
@@ -171,11 +174,11 @@ async def add(ctx,member: discord.Member=None, channel: discord.TextChannel = No
         await ctx.send("Slot Not In DataBase")
         return
 
-                
 
-                
 
-    
+
+
+
     if (member == False):
         await ctx.reply("Member Not Found")
 
@@ -188,7 +191,7 @@ async def add(ctx,member: discord.Member=None, channel: discord.TextChannel = No
 @bot.command()
 @commands.has_role(int(staff))
 async def renew(ctx,member: discord.Member = None,channel: discord.TextChannel=None,yoyo: int = None,cx=None):
-     
+
 
     rr = []
 
@@ -205,7 +208,7 @@ async def renew(ctx,member: discord.Member = None,channel: discord.TextChannel=N
     if (ftf == False):
         await ctx.send("Slot Not In DataBase")
         return
-                
+
     print("ru")
     if (member == None):
         await ctx.reply("Member Not Found")
@@ -241,8 +244,8 @@ async def renew(ctx,member: discord.Member = None,channel: discord.TextChannel=N
         data.append(dataz)
         with open("data.json", "w") as file:
             json.dump(data, file,indent=4)
-     
-    embed = discord.Embed(description="""Your Slot Rules""",color=0xFFFF00)
+
+    embed = discord.Embed(description="""Always use Middleman And no scam""",color=0xFFFF00)
 
     embed.set_author(name="Slot Rules")
     embed.set_thumbnail(url=f"{ctx.guild.icon}")
@@ -327,12 +330,12 @@ async def create(ctx,member: discord.Member=None,yoyo: int = None,cx=None,*,x=No
     if yoyo == None:
         await ctx.reply("Use valid Formate: ,add @user 1 m his Slot")
         return
-    
+
     if cx == None:
         await ctx.reply("Use valid Formate: ,add @user 1 m his Slot")
         return
 
-    
+
     if (x == None):
         x = member.display_name
 
@@ -340,8 +343,8 @@ async def create(ctx,member: discord.Member=None,yoyo: int = None,cx=None,*,x=No
     ctx.guild.default_role: discord.PermissionOverwrite(view_channel=True,send_messages=False),
     member: discord.PermissionOverwrite(view_channel=True,send_messages=True,mention_everyone=True)
 }
-    
-    
+
+
 
     category = discord.utils.get(ctx.guild.categories, id=int(cid))
 
@@ -351,7 +354,7 @@ async def create(ctx,member: discord.Member=None,yoyo: int = None,cx=None,*,x=No
     role = discord.utils.get(ctx.author.guild.roles, id=int(rid))
     await member.add_roles(role)
 
-    embed = discord.Embed(description="""Your Slot Rules *""",color=0xFFFF00)
+    embed = discord.Embed(description="""Always use Middleman And no scam 1 everyone and 3here per week""",color=0xFFFF00)
 
     embed.set_author(name="Slot Rules")
     embed.set_thumbnail(url=ctx.guild.icon)
@@ -364,7 +367,7 @@ async def create(ctx,member: discord.Member=None,yoyo: int = None,cx=None,*,x=No
         yoyo = (yoyo * 30 * 24 * 60 * 60) + datetime.datetime.now().timestamp()
     else:
         await ctx.reply("Use valid Formate: ,add @user 1 m his Slot")
-        
+
     embed = discord.Embed(description=f'**Slot Owner:** {member.mention}\n**End:** <t:{int(yoyo)}:R>',color=0xFFFF00)
     embed.set_footer(text=ctx.guild.name)
     embed.set_author(name=member)
@@ -381,8 +384,8 @@ async def create(ctx,member: discord.Member=None,yoyo: int = None,cx=None,*,x=No
     except FileNotFoundError:
         data = []
     data.append(dataz)
-   
+
     with open("data.json", "w") as file:
         json.dump(data, file,indent=4)
-  
-bot.run("Your bot Token")
+
+bot.run("MTMyNjQ4NzA0OTQ4MTQ5MDQ0Mg.G4H17J.kk8masnbMpNuzZiJpUdz9QGdfmvkWKrUFtmqn8")
