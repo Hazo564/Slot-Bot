@@ -388,4 +388,4 @@ async def create(ctx,member: discord.Member=None,yoyo: int = None,cx=None,*,x=No
     with open("data.json", "w") as file:
         json.dump(data, file,indent=4)
 
-bot.run("MTMyNjQ4NzA0OTQ4MTQ5MDQ0Mg.G4H17J.kk8masnbMpNuzZiJpUdz9QGdfmvkWKrUFtmqn8")
+bot.run("bot toke,n")
